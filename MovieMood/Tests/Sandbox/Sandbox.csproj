@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.7.82" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.2" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.164" PrivateAssets="all">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\MovieMood.Common\MovieMood.Common.csproj" />
+    <ProjectReference Include="..\..\Data\MovieMood.Data.Common\MovieMood.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\MovieMood.Data.Models\MovieMood.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\MovieMood.Data\MovieMood.Data.csproj" />
+    <ProjectReference Include="..\..\Services\MovieMood.Services.Data\MovieMood.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\MovieMood.Services.Mapping\MovieMood.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\MovieMood.Services.Messaging\MovieMood.Services.Messaging.csproj" />
+    <ProjectReference Include="..\..\Services\MovieMood.Services\MovieMood.Services.csproj" />
+  </ItemGroup>
+
+</Project>
