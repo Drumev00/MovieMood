@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\MovieMood.Data.Common\MovieMood.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\MovieMood.Data.Models\MovieMood.Data.Models.csproj" />
+    <ProjectReference Include="..\..\MovieMood.Common\MovieMood.Common.csproj" />
     <ProjectReference Include="..\MovieMood.Services.Mapping\MovieMood.Services.Mapping.csproj" />
   </ItemGroup>
 

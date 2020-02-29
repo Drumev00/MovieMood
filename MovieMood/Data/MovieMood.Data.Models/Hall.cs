@@ -14,6 +14,7 @@
         }
 
         [Required]
+        [MaxLength(20)]
         public string Name { get; set; }
 
         // Nav props:

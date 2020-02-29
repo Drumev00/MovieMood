@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace MovieMood.Data.Migrations
+﻿namespace MovieMood.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddMyTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

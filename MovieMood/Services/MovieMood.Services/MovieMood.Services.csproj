@@ -18,4 +18,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\MovieMood.Data.Common\MovieMood.Data.Common.csproj" />
+  </ItemGroup>
+
 </Project>

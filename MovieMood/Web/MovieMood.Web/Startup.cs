@@ -16,6 +16,8 @@
     using MovieMood.Data.Repositories;
     using MovieMood.Data.Seeding;
     using MovieMood.Services.Data;
+    using MovieMood.Services.Data.Halls;
+    using MovieMood.Services.Data.Seats;
     using MovieMood.Services.Mapping;
     using MovieMood.Services.Messaging;
     using MovieMood.Web.ViewModels;
@@ -58,6 +60,8 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<ISeatsService, SeatsService>();
+            services.AddTransient<IHallsService, HallsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
