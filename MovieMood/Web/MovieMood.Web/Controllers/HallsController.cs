@@ -9,6 +9,7 @@
     using Microsoft.AspNetCore.Mvc;
     using MovieMood.Services.Data.Halls;
     using MovieMood.Web.ViewModels.Halls.InputModels;
+    using MovieMood.Web.ViewModels.Halls.ViewModels;
 
     public class HallsController : BaseController
     {
@@ -33,6 +34,39 @@
             await this.hallsService.CreateAsync(input.Name);
 
             return this.Redirect("/Home/Index");
+        }
+
+        [HttpGet("/Halls")]
+        public IActionResult Choose()
+        {
+            return this.View();
+        }
+
+        [Authorize]
+        public IActionResult All()
+        {
+            var hallList = new HallListingViewModel
+            {
+                Halls = this.hallsService.All(),
+            };
+
+            return this.View(hallList);
+        }
+
+        [Authorize]
+        public IActionResult Details(int hallId)
+        {
+            var viewModel = this.hallsService.GetDetailsById(hallId);
+
+            return this.View(viewModel);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Delete(int hallId)
+        {
+           await this.hallsService.SoftDelete(hallId);
+
+           return this.Redirect("/Halls/All");
         }
     }
 }
