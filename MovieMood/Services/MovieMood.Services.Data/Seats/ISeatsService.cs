@@ -5,5 +5,7 @@
     public interface ISeatsService
     {
         Task CreateAsync(int row, int number, int hallId);
+
+        Task DeleteAsync(int hallId);
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace MovieMood.Services.Data.Seats
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using MovieMood.Data.Common.Repositories;
@@ -8,11 +9,11 @@
 
     public class SeatsService : ISeatsService
     {
-        private readonly IDeletableEntityRepository<Seat> entityRepository;
+        private readonly IDeletableEntityRepository<Seat> seatsRepository;
 
-        public SeatsService(IDeletableEntityRepository<Seat> entityRepository)
+        public SeatsService(IDeletableEntityRepository<Seat> seatsRepository)
         {
-            this.entityRepository = entityRepository;
+            this.seatsRepository = seatsRepository;
         }
 
         public async Task CreateAsync(int row, int number, int hallId)
@@ -26,8 +27,18 @@
                 HallId = hallId,
             };
 
-            await this.entityRepository.AddAsync(seat);
-            await this.entityRepository.SaveChangesAsync();
+            await this.seatsRepository.AddAsync(seat);
+            await this.seatsRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int hallId)
+        {
+            var seat = this.seatsRepository.All()
+                .Where(s => s.HallId == hallId)
+                .FirstOrDefault();
+
+            this.seatsRepository.Delete(seat);
+            await this.seatsRepository.SaveChangesAsync();
         }
     }
 }

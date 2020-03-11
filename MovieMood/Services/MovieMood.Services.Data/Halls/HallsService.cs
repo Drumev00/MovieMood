@@ -11,37 +11,28 @@
     using MovieMood.Data.Models;
     using MovieMood.Services.Data.Seats;
     using MovieMood.Services.Mapping;
-    using MovieMood.Web.ViewModels.Halls.ViewModels;
 
     public class HallsService : IHallsService
     {
-        private readonly IDeletableEntityRepository<Hall> entityRepository;
+        private readonly IDeletableEntityRepository<Hall> hallsRepository;
         private readonly ISeatsService seatsService;
 
         public HallsService(IDeletableEntityRepository<Hall> entityRepository, ISeatsService seatsService)
         {
-            this.entityRepository = entityRepository;
+            this.hallsRepository = entityRepository;
             this.seatsService = seatsService;
         }
 
-        public IEnumerable<HallInfoViewModel> All()
+        public IEnumerable<T> All<T>()
         {
-            var hallList = this.entityRepository.AllAsNoTracking()
+            var hallList = this.hallsRepository.All()
                 .OrderBy(h => h.Id)
-                .Select(h => new HallInfoViewModel
-                {
-                    Id = h.Id,
-                    Name = h.Name,
-                    CreatedOn = h.CreatedOn.ToString(),
-                    MaxSeats = h.Seats.Count,
-                    FreeSeats = h.Seats.Count(s => !s.IsReserved),
-                })
+                .To<T>()
                 .ToList();
 
             return hallList;
         }
 
-        // TODO: Probably add mapping table
         public async Task CreateAsync(string name)
         {
             var hall = new Hall
@@ -50,8 +41,8 @@
                 Name = name,
             };
 
-            await this.entityRepository.AddAsync(hall);
-            await this.entityRepository.SaveChangesAsync();
+            await this.hallsRepository.AddAsync(hall);
+            await this.hallsRepository.SaveChangesAsync();
 
             for (int i = 1; i <= GlobalConstants.SeatsRow; i++)
             {
@@ -62,28 +53,29 @@
             }
         }
 
-        public HallDetailsViewModel GetDetailsById(int id)
+        public T GetDetailsById<T>(int id)
         {
-            var hall = this.entityRepository.All()
-                .FirstOrDefault(h => h.Id == id);
+            var hall = this.hallsRepository.All()
+                .Where(h => h.Id == id)
+                .To<T>()
+                .FirstOrDefault();
 
-            var details = new HallDetailsViewModel
-            {
-                Id = hall.Id,
-                Name = hall.Name,
-                CreatedOn = hall.CreatedOn.ToString(),
-            };
-
-            return details;
+            return hall;
         }
 
-        public async Task SoftDelete(int hallId)
+        public async Task SoftDeleteHallAsync(int hallId)
         {
-            var hall = this.entityRepository.All().FirstOrDefault(h => h.Id == hallId);
+            var hall = this.hallsRepository.All().FirstOrDefault(h => h.Id == hallId);
 
-            this.entityRepository.Delete(hall);
+            this.hallsRepository.Delete(hall);
 
-            await this.entityRepository.SaveChangesAsync();
+            for (int i = 0; i < GlobalConstants.SeatsRow; i++)
+            {
+                for (int j = 0; j < GlobalConstants.SeatsCol; j++)
+                {
+                    await this.seatsService.DeleteAsync(hallId);
+                }
+            }
         }
     }
 }

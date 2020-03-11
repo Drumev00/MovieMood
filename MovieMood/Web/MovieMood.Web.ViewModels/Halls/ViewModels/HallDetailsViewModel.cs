@@ -1,6 +1,9 @@
 ﻿namespace MovieMood.Web.ViewModels.Halls.ViewModels
 {
-    public class HallDetailsViewModel
+    using MovieMood.Data.Models;
+    using MovieMood.Services.Mapping;
+
+    public class HallDetailsViewModel : IMapFrom<Hall>
     {
         public int Id { get; set; }
 

@@ -9,10 +9,10 @@
     {
         Task CreateAsync(string name);
 
-        IEnumerable<HallInfoViewModel> All();
+        IEnumerable<T> All<T>();
 
-        HallDetailsViewModel GetDetailsById(int id);
+        T GetDetailsById<T>(int id);
 
-        Task SoftDelete(int hallId);
+        Task SoftDeleteHallAsync(int hallId);
     }
 }
