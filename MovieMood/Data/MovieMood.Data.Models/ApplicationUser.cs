@@ -17,6 +17,8 @@ namespace MovieMood.Data.Models
             this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
 
+        public decimal Balance { get; set; }
+
         // Audit info
         public DateTime CreatedOn { get; set; }
 
