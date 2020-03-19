@@ -23,14 +23,14 @@
         public bool Is3D { get; set; }
 
         // Nav props:
-        public virtual int HallId { get; set; }
+        public int HallId { get; set; }
 
         public virtual Hall Hall { get; set; }
 
-        public virtual string MovieId { get; set; }
+        public string MovieId { get; set; }
 
         public virtual Movie Movie { get; set; }
 
-        public ICollection<Ticket> Tickets { get; set; }
+        public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace MovieMood.Web
 {
     using System.Reflection;
-
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -15,6 +15,7 @@
     using MovieMood.Data.Models;
     using MovieMood.Data.Repositories;
     using MovieMood.Data.Seeding;
+    using MovieMood.Services.Cloudinary;
     using MovieMood.Services.Data;
     using MovieMood.Services.Data.Halls;
     using MovieMood.Services.Data.Seats;
@@ -62,6 +63,20 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ISeatsService, SeatsService>();
             services.AddTransient<IHallsService, HallsService>();
+
+            // Cloudinary
+            Account account = new Account
+            {
+                Cloud = this.configuration["Cloudinary:CloudName"],
+                ApiKey = this.configuration["Cloudinary:APIKey"],
+                ApiSecret = this.configuration["Cloudinary:APISecret"],
+            };
+
+            Cloudinary cloudinary = new Cloudinary(account);
+
+            services.AddSingleton(cloudinary);
+            services.AddSingleton<ICloudinaryService, CloudinaryService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -17,9 +17,9 @@
         private readonly IDeletableEntityRepository<Hall> hallsRepository;
         private readonly ISeatsService seatsService;
 
-        public HallsService(IDeletableEntityRepository<Hall> entityRepository, ISeatsService seatsService)
+        public HallsService(IDeletableEntityRepository<Hall> hallsRepository, ISeatsService seatsService)
         {
-            this.hallsRepository = entityRepository;
+            this.hallsRepository = hallsRepository;
             this.seatsService = seatsService;
         }
 

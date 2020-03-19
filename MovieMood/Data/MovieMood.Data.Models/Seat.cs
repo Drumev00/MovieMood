@@ -16,7 +16,7 @@
         public bool IsReserved { get; set; }
 
         // Nav props:
-        public virtual int HallId { get; set; }
+        public int HallId { get; set; }
 
         public virtual Hall Hall { get; set; }
     }

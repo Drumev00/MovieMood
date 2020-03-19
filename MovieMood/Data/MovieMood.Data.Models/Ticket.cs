@@ -16,11 +16,11 @@
         public decimal Price { get; set; }
 
         // Nav props:
-        public virtual int SeatId { get; set; }
+        public int SeatId { get; set; }
 
         public virtual Seat Seat { get; set; }
 
-        public virtual string ProjectionId { get; set; }
+        public string ProjectionId { get; set; }
 
         public virtual Projection Projection { get; set; }
 

@@ -16,8 +16,11 @@
         [Required]
         public DateTime PurchaseDate { get; set; }
 
+        [Required]
+        public int TicketQuantity { get; set; }
+
         // Nav props:
-        public virtual string UserId { get; set; }
+        public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 

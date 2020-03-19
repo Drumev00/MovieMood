@@ -64,7 +64,8 @@
             base.OnModelCreating(builder);
 
             ConfigureUserIdentityRelations(builder);
-            ConfigureMappingTable(builder);
+            ConfigureTicketOrdersTable(builder);
+            ConfigureMovieGenresTable(builder);
 
             EntityIndexesConfiguration.Configure(builder);
 
@@ -112,10 +113,16 @@
                 .OnDelete(DeleteBehavior.Restrict);
         }
 
-        private static void ConfigureMappingTable(ModelBuilder builder)
+        private static void ConfigureTicketOrdersTable(ModelBuilder builder)
         {
             builder.Entity<TicketsOrders>()
                 .HasKey(to => new { to.OrderId, to.TicketId });
+        }
+
+        private static void ConfigureMovieGenresTable(ModelBuilder builder)
+        {
+            builder.Entity<MovieGenres>()
+               .HasKey(to => new { to.MovieId, to.Genre });
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

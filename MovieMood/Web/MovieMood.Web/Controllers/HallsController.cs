@@ -4,11 +4,12 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using MovieMood.Common;
     using MovieMood.Services.Data.Halls;
     using MovieMood.Web.ViewModels.Halls.InputModels;
     using MovieMood.Web.ViewModels.Halls.ViewModels;
 
-    // [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class HallsController : BaseController
     {
         private readonly IHallsService hallsService;

@@ -29,9 +29,6 @@
         public TimeSpan Duration { get; set; }
 
         [Required]
-        public Genre Genre { get; set; }
-
-        [Required]
         [MaxLength(150)]
         public string Cast { get; set; }
 
@@ -41,5 +38,7 @@
 
         // Nav props:
         public virtual ICollection<Projection> Projections { get; set; }
+
+        public virtual ICollection<MovieGenres> MovieGenres { get; set; }
     }
 }
