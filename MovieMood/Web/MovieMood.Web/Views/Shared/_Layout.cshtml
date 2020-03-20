@@ -33,12 +33,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
                         </li>
+<<<<<<< HEAD
                         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Halls" asp-action="Choose">Halls</a>
                             </li>
                         }
+=======
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Halls" asp-action="Choose">Halls</a>
+                        </li>
+>>>>>>> parent of 6128237... Add Roles. Admin View in Layout. Users have got balance.
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
