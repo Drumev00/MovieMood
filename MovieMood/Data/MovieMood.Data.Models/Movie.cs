@@ -12,6 +12,7 @@
         public Movie()
         {
             this.Projections = new HashSet<Projection>();
+            this.MovieGenres = new HashSet<MovieGenres>();
         }
 
         [Required]

@@ -1,6 +1,7 @@
 ﻿namespace MovieMood.Web
 {
     using System.Reflection;
+
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -18,6 +19,8 @@
     using MovieMood.Services.Cloudinary;
     using MovieMood.Services.Data;
     using MovieMood.Services.Data.Halls;
+    using MovieMood.Services.Data.MovieGenres;
+    using MovieMood.Services.Data.Movies;
     using MovieMood.Services.Data.Seats;
     using MovieMood.Services.Mapping;
     using MovieMood.Services.Messaging;
@@ -63,6 +66,8 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ISeatsService, SeatsService>();
             services.AddTransient<IHallsService, HallsService>();
+            services.AddTransient<IMovieGenresService, MovieGenresService>();
+            services.AddTransient<IMoviesService, MoviesService>();
 
             // Cloudinary
             Account account = new Account

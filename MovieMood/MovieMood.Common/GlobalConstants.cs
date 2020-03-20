@@ -9,5 +9,13 @@
         public const int SeatsRow = 10;
 
         public const int SeatsCol = 18;
+
+        public const string UserRole = "User";
+
+        public const int MaxAdminCount = 1;
+
+        public static int CurrentAdminCount = 0;
+
+        public const string CloudinaryStartUrl = @"https://res.cloudinary.com/dn2ouybbf/image/upload/";
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieMood.Data;
 
 namespace MovieMood.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200317144525_UsersBalance")]
+    partial class UsersBalance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -301,6 +303,9 @@ namespace MovieMood.Data.Migrations
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("time");
 
+                    b.Property<int>("Genre")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImagePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -328,33 +333,6 @@ namespace MovieMood.Data.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("MovieMood.Data.Models.MovieGenres", b =>
-                {
-                    b.Property<string>("MovieId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Genre")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("MovieId", "Genre");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("MovieGenres");
-                });
-
             modelBuilder.Entity("MovieMood.Data.Models.Order", b =>
                 {
                     b.Property<string>("Id")
@@ -374,9 +352,6 @@ namespace MovieMood.Data.Migrations
 
                     b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("TicketQuantity")
-                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -550,21 +525,7 @@ namespace MovieMood.Data.Migrations
                     b.Property<string>("TicketId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("OrderId", "TicketId");
-
-                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("TicketId");
 
@@ -622,19 +583,10 @@ namespace MovieMood.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MovieMood.Data.Models.MovieGenres", b =>
-                {
-                    b.HasOne("MovieMood.Data.Models.Movie", "Movie")
-                        .WithMany("MovieGenres")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MovieMood.Data.Models.Order", b =>
                 {
                     b.HasOne("MovieMood.Data.Models.ApplicationUser", "User")
-                        .WithMany("Orders")
+                        .WithMany()
                         .HasForeignKey("UserId");
                 });
 

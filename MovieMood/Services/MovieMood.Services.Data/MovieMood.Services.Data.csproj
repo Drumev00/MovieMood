@@ -24,6 +24,7 @@
     <ProjectReference Include="..\..\MovieMood.Common\MovieMood.Common.csproj" />
     <ProjectReference Include="..\..\Web\MovieMood.Web.ViewModels\MovieMood.Web.ViewModels.csproj" />
     <ProjectReference Include="..\MovieMood.Services.Mapping\MovieMood.Services.Mapping.csproj" />
+    <ProjectReference Include="..\MovieMood.Services\MovieMood.Services.csproj" />
   </ItemGroup>
 
 </Project>

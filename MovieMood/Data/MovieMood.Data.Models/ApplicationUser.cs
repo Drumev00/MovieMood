@@ -18,6 +18,8 @@ namespace MovieMood.Data.Models
             this.Orders = new HashSet<Order>();
         }
 
+        public decimal Balance { get; set; }
+
         // Audit info
         public DateTime CreatedOn { get; set; }
 

@@ -31,26 +31,11 @@
     @foreach (var genre in Enum.GetValues(typeof(MovieMood.Data.Models.Enums.Genre)))
     {
         <label>
-            <input type="checkbox" value="@genre" name="genre" />
+            <input type="checkbox" value="@genre" name="AreChecked" />
             @genre
         </label>
     }
-    <br>
-    <button type="button">Get Values</button>
     <div class="form-group">
         <input asp-controller="Movies" asp-action="Create" type="submit" value="Create" class="btn btn-success" />
     </div>
 </form>
-
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $("button").click(function () {
-            var favorite = [];
-            $.each($("input[name='genre']:checked"), function () {
-                favorite.push($(this).val());
-            });
-            alert("My favourite sports are: " + favorite.join(", "));
-        });
-    });
-</script>

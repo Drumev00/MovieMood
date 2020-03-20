@@ -1,10 +1,8 @@
-﻿
-namespace MovieMood.Web.ViewModels.Movies.InputModels
+﻿namespace MovieMood.Web.ViewModels.Movies.InputModels
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
-    using MovieMood.Data.Models.Enums;
 
     public class CreateMovieInputModel
     {
@@ -29,5 +27,7 @@ namespace MovieMood.Web.ViewModels.Movies.InputModels
         [Required]
         [MaxLength(40)]
         public string Director { get; set; }
+
+        public ICollection<string> AreChecked { get; set; }
     }
 }
