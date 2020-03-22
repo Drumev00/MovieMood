@@ -23,8 +23,6 @@
         {
         }
 
-        public DbSet<Setting> Settings { get; set; }
-
         public DbSet<Hall> Halls { get; set; }
 
         public DbSet<Movie> Movies { get; set; }

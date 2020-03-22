@@ -43,4 +43,22 @@
     <ProjectReference Include="..\MovieMood.Web.Infrastructure\MovieMood.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\MovieMood.Web.ViewModels\MovieMood.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Administration\Views\Halls\All.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Administration\Views\Halls\Choose.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Administration\Views\Halls\Create.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Administration\Views\Halls\Details.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Administration\Views\Movies\Create.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

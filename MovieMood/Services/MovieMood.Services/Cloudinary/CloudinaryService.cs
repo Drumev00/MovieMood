@@ -9,7 +9,7 @@
     {
         private readonly Cloudinary cloudinary;
 
-        public CloudinaryService(CloudinaryDotNet.Cloudinary cloudinary)
+        public CloudinaryService(Cloudinary cloudinary)
         {
             this.cloudinary = cloudinary;
         }
