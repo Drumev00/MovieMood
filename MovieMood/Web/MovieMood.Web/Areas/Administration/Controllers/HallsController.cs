@@ -4,8 +4,8 @@
 
     using Microsoft.AspNetCore.Mvc;
     using MovieMood.Services.Data.Halls;
-    using MovieMood.Web.ViewModels.Halls.InputModels;
-    using MovieMood.Web.ViewModels.Halls.ViewModels;
+    using MovieMood.Web.ViewModels.Halls.Administration.InputModels;
+    using MovieMood.Web.ViewModels.Halls.Administration.ViewModels;
 
     public class HallsController : AdministrationController
     {

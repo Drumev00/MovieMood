@@ -1,0 +1,21 @@
+﻿@model MovieMood.Web.ViewModels.Movies.Users.ViewModels.MoviesListingViewModel
+@using MovieMood.Common
+
+<div class="bg-blur container">
+    <div class="row">
+        @foreach (var movie in Model.Movies)
+        {
+            var cloudLink = GlobalConstants.CloudinaryStartUrl + movie.ImagePath;
+
+            <div class="col-3 text-center">
+                <header class="modal-header">
+                    <h5 class="text-center font-italic d-inline"><span>@movie.Name</span></h5>
+                </header>
+                <a href="/Movies/Details?id=@movie.Id"><img style="width: 280px; height: 280px" src="@cloudLink" class="img-fluid" /></a>
+                <p>@movie.ShortResume</p>
+                <p><strong>Directed by:</strong> @movie.Director</p>
+            </div>
+        }
+    </div>
+</div>
+

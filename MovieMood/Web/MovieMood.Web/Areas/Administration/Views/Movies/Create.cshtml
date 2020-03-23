@@ -1,4 +1,4 @@
-﻿@model MovieMood.Web.ViewModels.Movies.InputModels.CreateMovieInputModel
+﻿@model MovieMood.Web.ViewModels.Movies.Administration.InputModels.CreateMovieInputModel
 
 <h3>Create Movie</h3>
 
@@ -16,7 +16,7 @@
     </div>
     <div class="form-group">
         <label asp-for="Resume">Resume</label>
-        <input asp-for="Resume" type="text" class="form-control" placeholder="Resume...">
+        <textarea asp-for="Resume" type="text" class="form-control" placeholder="Resume..."> </textarea>
         <span asp-validation-for="Resume" class="text-danger"/>
     </div>
     <div class="form-group">
@@ -26,7 +26,7 @@
     </div>
     <div class="form-group">
         <label asp-for="Cast">Cast</label>
-        <input asp-for="Cast" type="text" class="form-control" placeholder="Cast...">
+        <textarea asp-for="Cast" type="text" class="form-control" placeholder="Cast"> </textarea>
         <span asp-validation-for="Cast" class="text-danger"/>
     </div>
     <div class="form-group">

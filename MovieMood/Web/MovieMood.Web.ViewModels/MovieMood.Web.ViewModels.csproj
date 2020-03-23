@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\MovieMood.Data.Models\MovieMood.Data.Models.csproj" />
+    <ProjectReference Include="..\..\MovieMood.Common\MovieMood.Common.csproj" />
     <ProjectReference Include="..\..\Services\MovieMood.Services.Mapping\MovieMood.Services.Mapping.csproj" />
   </ItemGroup>
 

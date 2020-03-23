@@ -1,57 +1,28 @@
 ﻿namespace MovieMood.Web.Controllers
 {
-    using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using MovieMood.Services.Cloudinary;
     using MovieMood.Services.Data.Movies;
-    using MovieMood.Web.ViewModels.Movies.InputModels;
+    using MovieMood.Web.ViewModels.Movies.Users.ViewModels;
 
+    [Authorize]
     public class MoviesController : BaseController
     {
         private readonly IMoviesService moviesService;
-        private readonly ICloudinaryService cloudinary;
 
-        public MoviesController(IMoviesService moviesService, ICloudinaryService cloudinary)
+        public MoviesController(IMoviesService moviesService)
         {
             this.moviesService = moviesService;
-            this.cloudinary = cloudinary;
         }
 
-        public IActionResult Create()
+        public IActionResult All()
         {
-            return this.View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(CreateMovieInputModel input)
-        {
-            if (!this.ModelState.IsValid)
+            var viewModel = new MoviesListingViewModel()
             {
-                return this.View(input);
-            }
+                Movies = this.moviesService.All<MovieInfoViewModel>(),
+            };
 
-            await this.moviesService.CreateAsync(input);
-
-            return this.Redirect("/");
-        }
-
-        public IActionResult Upload()
-        {
-            return this.View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Upload(UploadImageInputModel input)
-        {
-            if (!this.ModelState.IsValid)
-            {
-                return this.View(input);
-            }
-
-            await this.cloudinary.UploadAsync(input.ImagePath);
-
-            return this.Redirect("/Movies/Create");
+            return this.View(viewModel);
         }
     }
 }

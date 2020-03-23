@@ -2,7 +2,10 @@
 @{
     this.ViewData["Title"] = "Home Page";
 }
-
+@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+{
+    this.Layout = "_AdminLayout";
+}
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
 </div>

@@ -2,29 +2,36 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
 
     using MovieMood.Data.Common.Repositories;
     using MovieMood.Data.Models;
-    using MovieMood.Services.Cloudinary;
     using MovieMood.Services.Data.MovieGenres;
-    using MovieMood.Web.ViewModels.Movies.InputModels;
+    using MovieMood.Services.Mapping;
+    using MovieMood.Web.ViewModels.Movies.Administration.InputModels;
 
     public class MoviesService : IMoviesService
     {
         private readonly IDeletableEntityRepository<Movie> moviesRepository;
         private readonly IMovieGenresService movieGenresService;
-        private readonly ICloudinaryService cloudinary;
 
         public MoviesService(
             IDeletableEntityRepository<Movie> moviesRepository,
-            IMovieGenresService movieGenresService,
-            ICloudinaryService cloudinary)
+            IMovieGenresService movieGenresService)
         {
             this.moviesRepository = moviesRepository;
             this.movieGenresService = movieGenresService;
-            this.cloudinary = cloudinary;
+        }
+
+        public IEnumerable<T> All<T>()
+        {
+            var movies = this.moviesRepository.AllAsNoTracking()
+                .To<T>()
+                .ToList();
+
+            return movies;
         }
 
         public async Task CreateAsync(CreateMovieInputModel model)

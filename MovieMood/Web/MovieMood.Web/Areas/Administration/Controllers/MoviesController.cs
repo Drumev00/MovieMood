@@ -4,7 +4,8 @@
 
     using Microsoft.AspNetCore.Mvc;
     using MovieMood.Services.Data.Movies;
-    using MovieMood.Web.ViewModels.Movies.InputModels;
+    using MovieMood.Web.ViewModels.Movies.Administration.InputModels;
+    using MovieMood.Web.ViewModels.Movies.Administration.ViewModels;
 
     public class MoviesController : AdministrationController
     {
@@ -31,6 +32,15 @@
             await this.moviesService.CreateAsync(input);
 
             return this.Redirect("/");
+        }
+
+        public IActionResult All()
+        {
+            var viewModel = new AdminMoviesListingViewModel()
+            {
+                Movies = this.moviesService.All<AdminMovieInfoViewModel>(),
+            };
+            return this.View(viewModel);
         }
     }
 }
