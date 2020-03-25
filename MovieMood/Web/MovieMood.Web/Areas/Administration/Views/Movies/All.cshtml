@@ -7,14 +7,17 @@
         {
             var cloudLink = GlobalConstants.CloudinaryStartUrl + movie.ImagePath;
 
-            <div class="col-3 text-center">
-                <header class="modal-header">
-                    <h5 class="text-center font-italic d-inline"><span>@movie.Name</span></h5>
-                </header>
-                <a href="/Movies/Details?id=@movie.Id"><img style="width: 280px; height: 280px" src="@cloudLink" class="img-fluid" /></a>
-                <p>@movie.ShortResume</p>
-                <p><strong>Directed by:</strong> @movie.Director</p>
-            </div>
+        <div class="col-3 text-center">
+            <header class="modal-header">
+                <h5 class="text-center font-italic"><span class="text-center">@movie.Name</span></h5>
+                <br />
+                <br />
+                <br />
+            </header>
+            <a href="/Administration/Movies/Details?id=@movie.Id"><img style="width: 260px; height: 260px" src="@cloudLink" class="img-fluid" /></a>
+            <p>@movie.ShortResume</p>
+            <p><strong>Directed by:</strong> @movie.Director</p>
+        </div>
         }
     </div>
 </div>

@@ -1,6 +1,8 @@
 ﻿namespace MovieMood.Services.Data.MovieGenres
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using MovieMood.Data.Common.Repositories;
@@ -26,6 +28,16 @@
 
             await this.movieGenresRepository.AddAsync(movieGenres);
             await this.movieGenresRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<string> GetGenres(string movieId)
+        {
+            var genres = this.movieGenresRepository.All()
+                .Where(g => g.MovieId == movieId)
+                .Select(g => g.Genre.ToString())
+                .ToList();
+
+            return genres;
         }
     }
 }

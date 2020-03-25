@@ -10,5 +10,7 @@
         Task CreateAsync(CreateMovieInputModel model);
 
         IEnumerable<T> All<T>();
+
+        T GetDetailsById<T>(string id);
     }
 }

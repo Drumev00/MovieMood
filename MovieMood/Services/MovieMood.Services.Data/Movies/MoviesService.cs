@@ -56,5 +56,15 @@
                 await this.movieGenresService.CreateMappingAsync(movie.Id, item);
             }
         }
+
+        public T GetDetailsById<T>(string id)
+        {
+            var movie = this.moviesRepository.All()
+                .Where(m => m.Id == id)
+                .To<T>()
+                .FirstOrDefault();
+
+            return movie;
+        }
     }
 }
