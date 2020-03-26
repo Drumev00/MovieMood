@@ -6,7 +6,7 @@
     using MovieMood.Data.Models;
     using MovieMood.Services.Mapping;
 
-    public class AdminMovieDetailsViewModel : IMapFrom<Movie>
+    public class EditMovieViewModel : IMapFrom<Movie>
     {
         public string Id { get; set; }
 
@@ -22,10 +22,6 @@
 
         public string Director { get; set; }
 
-        public DateTime CreatedOn { get; set; }
-
         public string Trailer { get; set; }
-
-        public IEnumerable<string> Genres { get; set; }
     }
 }

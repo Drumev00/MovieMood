@@ -37,6 +37,8 @@
         [MaxLength(40)]
         public string Director { get; set; }
 
+        public string Trailer { get; set; }
+
         // Nav props:
         public virtual ICollection<Projection> Projections { get; set; }
 

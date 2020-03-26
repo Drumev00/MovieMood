@@ -56,5 +56,32 @@
 
             return this.View(viewModel);
         }
+
+        public IActionResult Edit(string movieId)
+        {
+            var viewModel = this.moviesService.GetDetailsById<EditMovieViewModel>(movieId);
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditMovieViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            await this.moviesService.EditAsync(model);
+
+            return this.Redirect($"/Administration/Movies/Details?id={model.Id}");
+        }
+
+        public async Task<IActionResult> Delete(string movieId)
+        {
+            await this.moviesService.SoftDeleteAsync(movieId);
+
+            return this.RedirectToAction("All");
+        }
     }
 }

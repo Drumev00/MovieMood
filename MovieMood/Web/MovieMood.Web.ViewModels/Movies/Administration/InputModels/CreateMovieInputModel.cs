@@ -28,6 +28,8 @@
         [MaxLength(40)]
         public string Director { get; set; }
 
+        public string Trailer { get; set; }
+
         public ICollection<string> AreChecked { get; set; }
     }
 }

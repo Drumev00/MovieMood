@@ -7,32 +7,36 @@
     <div class="form-group">
         <label asp-for="Name">Movie Name</label>
         <input asp-for="Name" type="text" class="form-control" placeholder="Name">
-        <span asp-validation-for="Name" class="text-danger"/>
+        <span asp-validation-for="Name" class="text-danger" />
     </div>
     <div class="form-group">
         <label asp-for="ImagePath">ImagePath</label>
         <input asp-for="ImagePath" type="text" class="form-control" placeholder="Path">
-        <span asp-validation-for="ImagePath" class="text-danger"/>
+        <span asp-validation-for="ImagePath" class="text-danger" />
     </div>
     <div class="form-group">
         <label asp-for="Resume">Resume</label>
         <textarea asp-for="Resume" type="text" class="form-control" placeholder="Resume..."> </textarea>
-        <span asp-validation-for="Resume" class="text-danger"/>
+        <span asp-validation-for="Resume" class="text-danger" />
     </div>
     <div class="form-group">
         <label asp-for="Duration">Duration</label>
         <input asp-for="Duration" type="time" class="form-control">
-        <span asp-validation-for="Duration" class="text-danger"/>
+        <span asp-validation-for="Duration" class="text-danger" />
     </div>
     <div class="form-group">
         <label asp-for="Cast">Cast</label>
         <textarea asp-for="Cast" type="text" class="form-control" placeholder="Cast"> </textarea>
-        <span asp-validation-for="Cast" class="text-danger"/>
+        <span asp-validation-for="Cast" class="text-danger" />
     </div>
     <div class="form-group">
         <label asp-for="Director">Director</label>
         <input asp-for="Director" type="text" class="form-control" placeholder="Director...">
-        <span asp-validation-for="Director" class="text-danger"/>
+        <span asp-validation-for="Director" class="text-danger" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Trailer">Director</label>
+        <input asp-for="Trailer" type="text" class="form-control" placeholder="Link...">
     </div>
     @foreach (var genre in Enum.GetValues(typeof(MovieMood.Data.Models.Enums.Genre)))
     {

@@ -3,14 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using MovieMood.Data.Common.Repositories;
     using MovieMood.Data.Models;
+    using MovieMood.Data.Models.Enums;
     using MovieMood.Services.Data.MovieGenres;
     using MovieMood.Services.Mapping;
     using MovieMood.Web.ViewModels.Movies.Administration.InputModels;
+    using MovieMood.Web.ViewModels.Movies.Administration.ViewModels;
 
     public class MoviesService : IMoviesService
     {
@@ -46,6 +47,7 @@
                 Cast = model.Cast,
                 Director = model.Director,
                 CreatedOn = DateTime.UtcNow,
+                Trailer = model.Trailer,
             };
 
             await this.moviesRepository.AddAsync(movie);
@@ -57,6 +59,24 @@
             }
         }
 
+        public async Task EditAsync(EditMovieViewModel model)
+        {
+            var movieFromBase = this.moviesRepository.All()
+                .Where(m => m.Id == model.Id)
+                .FirstOrDefault();
+
+            movieFromBase.Name = model.Name;
+            movieFromBase.Resume = model.Resume;
+            movieFromBase.ImagePath = model.ImagePath;
+            movieFromBase.Duration = model.Duration;
+            movieFromBase.Cast = model.Cast;
+            movieFromBase.Director = model.Director;
+            movieFromBase.Trailer = model.Trailer;
+
+            this.moviesRepository.Update(movieFromBase);
+            await this.moviesRepository.SaveChangesAsync();
+        }
+
         public T GetDetailsById<T>(string id)
         {
             var movie = this.moviesRepository.All()
@@ -65,6 +85,17 @@
                 .FirstOrDefault();
 
             return movie;
+        }
+
+        public async Task SoftDeleteAsync(string movieId)
+        {
+            var movie = this.moviesRepository.All()
+                .Where(m => m.Id == movieId)
+                .FirstOrDefault();
+
+            await this.movieGenresService.SoftDeleteGenresAsync(movie.Id);
+            this.moviesRepository.Delete(movie);
+            await this.moviesRepository.SaveChangesAsync();
         }
     }
 }

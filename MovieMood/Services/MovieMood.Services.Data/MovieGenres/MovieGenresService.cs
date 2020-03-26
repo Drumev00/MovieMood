@@ -39,5 +39,19 @@
 
             return genres;
         }
+
+        public async Task SoftDeleteGenresAsync(string movieId)
+        {
+            var movieGenres = this.movieGenresRepository.All()
+                .Where(mg => mg.MovieId == movieId)
+                .ToList();
+
+            for (int i = 0; i < movieGenres.Count; i++)
+            {
+                this.movieGenresRepository.Delete(movieGenres[i]);
+            }
+
+            await this.movieGenresRepository.SaveChangesAsync();
+        }
     }
 }

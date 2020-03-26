@@ -8,5 +8,7 @@
         Task CreateMappingAsync(string movieId, string genre);
 
         IEnumerable<string> GetGenres(string movieId);
+
+        Task SoftDeleteGenresAsync(string movieId);
     }
 }

@@ -1,0 +1,56 @@
+﻿@model MovieMood.Web.ViewModels.Movies.Administration.ViewModels.EditMovieViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<section class="py-5">
+    <div class="container">
+        <h1 style="text-align: center" ;>Edit Movie</h1>
+        <form method="post" asp-area="Administration" asp-controller="Movies" asp-action="EditPost">
+            <div>
+                <div class="form-group">
+                    <label asp-for="Id">Id</label>
+                    <input asp-for="Id" type="text" readonly class="form-control" value="@Model.Id">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name">Name</label>
+                    <input asp-for="Name" type="text" class="form-control" value="@Model.Name">
+                    <span asp-validation-for="Name" class="text-danger" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Resume">Resume</label>
+                    <textarea asp-for="Resume" type="text" class="form-control" value="@Model.Resume"></textarea>
+                    <span asp-validation-for="Resume" class="text-danger" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ImagePath">ImagePath</label>
+                    <input asp-for="ImagePath" type="text" class="form-control" value="@Model.ImagePath">
+                    <span asp-validation-for="ImagePath" class="text-danger" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Duration">Duration</label>
+                    <input asp-for="Duration" type="time" class="form-control" value="@Model.Duration">
+                    <span asp-validation-for="Duration" class="text-danger" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cast">Cast</label>
+                    <textarea asp-for="Cast" type="text" class="form-control" value="@Model.Cast"></textarea>
+                    <span asp-validation-for="Cast" class="text-danger" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Director">Director</label>
+                    <input asp-for="Director" type="text" class="form-control" value="@Model.Director">
+                    <span asp-validation-for="Director" class="text-danger" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Trailer">Trailer</label>
+                    <input asp-for="Trailer" type="text" class="form-control" value="@Model.Trailer">
+                </div>
+            </div>
+            <div class="form-group">
+                <input asp-area="Administration" asp-controller="Movies" asp-action="Edit" type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</section>

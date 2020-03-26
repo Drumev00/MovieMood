@@ -28,6 +28,8 @@
         <p class="d-inline">@genre,</p>
     }
 }
-<p><strong style="margin: 15px";>Director: </strong>@Model.Director</p>
+<p><strong style="margin: 15px" ;>Director: </strong>@Model.Director</p>
 <br />
-<a href="/Administration/Movies/Delete?movieId=@Model.Id" class="btn btn-danger text-white mt-2">Delete Movie</a>
+<a href="/Administration/Movies/Delete?movieId=@Model.Id" class="btn btn-danger text-white mt-2 d-inline">Delete Movie</a>
+<a href="/Administration/Movies/Edit?movieId=@Model.Id" class="btn btn-primary text-white mt-2 d-inline">Edit</a>
+<a class="video" href="@Model.Trailer"><i class="video1"></i>WATCH TRAILER</a>
