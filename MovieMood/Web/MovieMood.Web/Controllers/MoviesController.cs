@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using MovieMood.Services.Data.MovieGenres;
     using MovieMood.Services.Data.Movies;
     using MovieMood.Web.ViewModels.Movies.Users.ViewModels;
 
@@ -9,10 +10,14 @@
     public class MoviesController : BaseController
     {
         private readonly IMoviesService moviesService;
+        private readonly IMovieGenresService movieGenresService;
 
-        public MoviesController(IMoviesService moviesService)
+        public MoviesController(
+            IMoviesService moviesService,
+            IMovieGenresService movieGenresService)
         {
             this.moviesService = moviesService;
+            this.movieGenresService = movieGenresService;
         }
 
         public IActionResult All()
@@ -21,6 +26,14 @@
             {
                 Movies = this.moviesService.All<MovieInfoViewModel>(),
             };
+
+            return this.View(viewModel);
+        }
+
+        public IActionResult Details(string id)
+        {
+            var viewModel = this.moviesService.GetDetailsById<MovieDetailsViewModel>(id);
+            viewModel.Genres = this.movieGenresService.GetGenres(id);
 
             return this.View(viewModel);
         }

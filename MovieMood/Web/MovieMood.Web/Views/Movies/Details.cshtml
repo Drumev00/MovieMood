@@ -1,4 +1,4 @@
-﻿@model MovieMood.Web.ViewModels.Movies.Administration.ViewModels.AdminMovieDetailsViewModel
+﻿@model MovieMood.Web.ViewModels.Movies.Users.ViewModels.MovieDetailsViewModel
 @using MovieMood.Common
 
 @{
@@ -15,7 +15,10 @@
     <p> <strong style="margin-left:15px; margin-right: 15px">Cast: </strong>@Model.Cast</p>
 </div>
 <p class="text-left"><strong style="margin-left:15px; margin-right: 15px">Duration: </strong>@Model.Duration</p>
+@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+{
 <p class="text-left"><strong style="margin-left:15px; margin-right: 15px">Added At: </strong>@Model.CreatedOn</p>
+}
 <p class="d-inline"><strong style="margin-left:15px; margin-right: 15px">Genres: </strong></p>
 @foreach (var genre in Model.Genres)
 {
@@ -30,6 +33,9 @@
 }
 <p><strong style="margin: 15px" ;>Director: </strong>@Model.Director</p>
 <br />
-<a href="/Administration/Movies/Delete?movieId=@Model.Id" class="btn btn-danger text-white mt-2 d-inline">Delete Movie</a>
-<a href="/Administration/Movies/Edit?movieId=@Model.Id" class="btn btn-primary text-white mt-2 d-inline">Edit</a>
-<a class="video" href="@Model.Trailer"><i class="video1"></i>WATCH TRAILER</a>
+@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+{
+    <a style="margin-top: 30px;" href="/Administration/Movies/Delete?movieId=@Model.Id" class="btn btn-danger text-white mt-2 d-inline">Delete Movie</a>
+    <a style="margin-top: 30px;" href="/Administration/Movies/Edit?movieId=@Model.Id" class="btn btn-primary text-white mt-2 d-inline">Edit</a>
+}
+<a style="margin-top: 30px; width: 240px" class="video" href="@Model.Trailer"><i class="video1"></i>WATCH TRAILER</a>

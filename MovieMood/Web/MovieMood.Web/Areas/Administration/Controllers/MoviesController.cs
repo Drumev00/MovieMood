@@ -36,25 +36,7 @@
 
             await this.moviesService.CreateAsync(input);
 
-            return this.Redirect("/");
-        }
-
-        public IActionResult All()
-        {
-            var viewModel = new AdminMoviesListingViewModel()
-            {
-                Movies = this.moviesService.All<AdminMovieInfoViewModel>(),
-            };
-            return this.View(viewModel);
-        }
-
-        public IActionResult Details(string id)
-        {
-            var viewModel = this.moviesService.GetDetailsById<AdminMovieDetailsViewModel>(id);
-
-            viewModel.Genres = this.movieGenresService.GetGenres(viewModel.Id);
-
-            return this.View(viewModel);
+            return this.Redirect("/Movies/All");
         }
 
         public IActionResult Edit(string movieId)
@@ -74,14 +56,14 @@
 
             await this.moviesService.EditAsync(model);
 
-            return this.Redirect($"/Administration/Movies/Details?id={model.Id}");
+            return this.Redirect($"/Movies/Details?id={model.Id}");
         }
 
         public async Task<IActionResult> Delete(string movieId)
         {
             await this.moviesService.SoftDeleteAsync(movieId);
 
-            return this.RedirectToAction("All");
+            return this.Redirect("/Movies/All");
         }
     }
 }

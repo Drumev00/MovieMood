@@ -14,11 +14,16 @@
                     <br />
                     <br />
                 </header>
-                <a href="/Movies/Details?id=@movie.Id"><img style="width: 280px; height: 320px"; src="@cloudLink" class="img-fluid" /></a>
+                <a href="/Movies/Details?id=@movie.Id"><img style="width: 280px; height: 320px" ; src="@cloudLink" class="img-fluid" /></a>
                 <p>@movie.ShortResume</p>
                 <p><strong>Directed by:</strong> @movie.Director</p>
             </div>
         }
     </div>
 </div>
+
+@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+{
+    <a href="/Administration/Movies/Create" class="btn btn-primary text-right text-white mt-2 d-inline">Create Movie</a>
+}
 

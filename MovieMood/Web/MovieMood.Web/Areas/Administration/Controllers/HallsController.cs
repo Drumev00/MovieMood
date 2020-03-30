@@ -31,7 +31,7 @@
 
             await this.hallsService.CreateAsync(input.Name);
 
-            return this.Redirect("/Home/Index");
+            return this.RedirectToAction("All");
         }
 
         public IActionResult Choose()

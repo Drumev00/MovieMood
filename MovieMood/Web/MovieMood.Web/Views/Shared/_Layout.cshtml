@@ -24,10 +24,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <ul class="navbar-nav flex-grow-1">
+                @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="Administration" asp-controller="Halls" asp-action="Choose">Halls</a>
+                    </li>
+                }
+            </ul>
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <partial name="_LoginPartial" />
             </div>
@@ -35,7 +39,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </nav>
     <div class="full">
         <div class="menu">
-            <ul>
+            <ul style="background-color: black">
                 <li><a class="active" href="/"><i class="home"></i></a></li>
                 <li><a asp-area="" asp-controller="Movies" asp-action="All"><div class="video"><i class="videos"></i><i class="videos1"></i></div></a></li>
                 <li><a href="reviews.html"><div class="cat"><i class="watching"></i><i class="watching1"></i></div></a></li>
@@ -49,12 +53,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="logo">
                         <a href="index.html"><img src="images/logo.png" alt="" /></a>
                         <p>Movie Mood</p>
-                    </div>
-                    <div class="search">
-                        <form>
-                            <input type="text" value="Search.." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search..';}" />
-                            <input type="submit" value="">
-                        </form>
                     </div>
                     <div class="clearfix"></div>
                 </div>
