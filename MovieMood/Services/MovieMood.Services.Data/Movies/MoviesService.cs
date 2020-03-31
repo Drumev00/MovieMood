@@ -77,6 +77,16 @@
             await this.moviesRepository.SaveChangesAsync();
         }
 
+        public string GetIdByName(string name)
+        {
+            var movie = this.moviesRepository.AllAsNoTracking()
+                .Where(m => m.Name.ToLower() == name.ToLower())
+                .Select(m => m.Id)
+                .FirstOrDefault();
+
+            return movie;
+        }
+
         public T GetDetailsById<T>(string id)
         {
             var movie = this.moviesRepository.All()

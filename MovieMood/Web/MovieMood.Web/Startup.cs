@@ -19,6 +19,7 @@
     using MovieMood.Services.Data.Halls;
     using MovieMood.Services.Data.MovieGenres;
     using MovieMood.Services.Data.Movies;
+    using MovieMood.Services.Data.Projections;
     using MovieMood.Services.Data.Seats;
     using MovieMood.Services.Mapping;
     using MovieMood.Services.Messaging;
@@ -65,6 +66,7 @@
             services.AddTransient<IHallsService, HallsService>();
             services.AddTransient<IMovieGenresService, MovieGenresService>();
             services.AddTransient<IMoviesService, MoviesService>();
+            services.AddTransient<IProjectionsService, ProjectionsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

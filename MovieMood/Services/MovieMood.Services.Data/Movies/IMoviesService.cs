@@ -14,6 +14,8 @@
 
         T GetDetailsById<T>(string id);
 
+        string GetIdByName(string name);
+
         Task SoftDeleteAsync(string movieId);
 
         Task EditAsync(EditMovieViewModel model);

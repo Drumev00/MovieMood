@@ -3,7 +3,6 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
-    using MovieMood.Services.Data.MovieGenres;
     using MovieMood.Services.Data.Movies;
     using MovieMood.Web.ViewModels.Movies.Administration.InputModels;
     using MovieMood.Web.ViewModels.Movies.Administration.ViewModels;
@@ -11,14 +10,10 @@
     public class MoviesController : AdministrationController
     {
         private readonly IMoviesService moviesService;
-        private readonly IMovieGenresService movieGenresService;
 
-        public MoviesController(
-            IMoviesService moviesService,
-            IMovieGenresService movieGenresService)
+        public MoviesController(IMoviesService moviesService)
         {
             this.moviesService = moviesService;
-            this.movieGenresService = movieGenresService;
         }
 
         public IActionResult Create()

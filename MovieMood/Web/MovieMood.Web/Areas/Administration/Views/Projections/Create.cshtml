@@ -1,0 +1,33 @@
+﻿@model MovieMood.Web.ViewModels.Projections.Administration.InputModels.CreateProjectionInputModel
+
+<h3>Create Projection</h3>
+
+<form asp-action="Create">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Time">Date-Time</label>
+        <input asp-for="Time" type="datetime-local" class="form-control" value="@DateTime.UtcNow" style="width: 535px"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="MovieName">Movie's Name</label>
+        <input style="width: 535px" asp-for="MovieName" type="text" class="form-control" />
+        <span asp-validation-for="MovieName" class="text-danger" />
+    </div>
+    <div class="form-group">
+        <label asp-for="HallId">Hall</label>
+        <select class="form-control" style="width: 535px" asp-for="HallId" asp-items="Model.Halls.Select(x => new SelectListItem(x.Name, x.Id.ToString()))"></select>
+        <span asp-validation-for="HallId" class="text-danger" />
+
+    </div>
+    <div class="form-check form-check-inline">
+        <input asp-for="IsPremiere" class="form-check-input" type="checkbox" name="IsPremiere">
+        <label asp-for="IsPremiere" class="form-check-label">Is Premiere</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input asp-for="Is3D" class="form-check-input" type="checkbox" name="Is3D">
+        <label asp-for="Is3D" class="form-check-label">Is 3D</label>
+    </div>
+    <div class="form-group">
+        <input asp-area="Administration" asp-controller="Projections" asp-action="Create" type="submit" value="Create" class="btn btn-success" />
+    </div>
+</form>

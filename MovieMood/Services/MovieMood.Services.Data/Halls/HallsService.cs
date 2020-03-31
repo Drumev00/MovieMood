@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using MovieMood.Common;
@@ -26,7 +25,7 @@
         public IEnumerable<T> All<T>()
         {
             var hallList = this.hallsRepository.All()
-                .OrderBy(h => h.Id)
+                .OrderBy(h => h.Name)
                 .To<T>()
                 .ToList();
 
