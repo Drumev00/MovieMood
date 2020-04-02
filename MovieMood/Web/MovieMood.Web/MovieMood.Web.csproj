@@ -61,8 +61,4 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Projections\" />
-  </ItemGroup>
 </Project>

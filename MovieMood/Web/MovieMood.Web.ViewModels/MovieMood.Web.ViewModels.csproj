@@ -24,8 +24,4 @@
     <ProjectReference Include="..\..\Services\MovieMood.Services.Mapping\MovieMood.Services.Mapping.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Projections\Users\ViewModels\" />
-  </ItemGroup>
-
 </Project>

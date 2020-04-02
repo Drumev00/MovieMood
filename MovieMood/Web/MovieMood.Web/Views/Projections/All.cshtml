@@ -1,0 +1,45 @@
+﻿@model MovieMood.Web.ViewModels.Projections.Users.ViewModels.ProjectionsListingViewModel
+@using MovieMood.Common
+
+@foreach (var projection in Model.Projections)
+{
+    var projectionTime = projection.Time.Minute == 0 
+        ? ((projection.Time.Hour + ":" + projection.Time.Minute) + "0") 
+        : projection.Time.Hour + ":" + projection.Time.Minute;
+    var cloudlink = GlobalConstants.CloudinaryStartUrl + projection.MovieImagePath;
+
+    <div class="center-block" style="border: ridge; margin: 10px">
+        <div class="row">
+            <aside>
+                <div class="movie-pic">
+                    <img style="height: 230px; width: 650px; margin-left: 23px; margin-bottom: 10px; margin-top: 10px" ; src="@cloudlink" class="img-fluid" />
+                </div>
+                <div class="pull-left">
+                    <header class="modal-header" style="display: block">
+                        <h4 class="font-italic text-left" style="margin-left: 20px;">
+                            @projection.MovieName
+                        </h4>
+                    </header>
+                    <br />
+                    @if (projection.IsPremiere)
+                    {
+                        <p class="ml-4">Premiere: @projection.Time.Date.ToLocalTime()</p>
+                    }
+                    <span style="margin: 25px">Buy a Ticket</span>
+                    <div class="row" style="border: groove; margin: 25px; width: 650px">
+                        @if (!projection.Is3D)
+                        {
+                            <h4 class="d-inline" style="margin: 10px">2D</h4>
+
+                        }
+                        else
+                        {
+                            <h4 class="d-inline" style="margin: 10px">3D</h4>
+                        }
+                        <h4 style="margin-left: 190px"><a href="/Tickets/Buy/?projectionId=@projection.Id" class="btn btn-secondary mt-1">@projectionTime</a></h4>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+}
