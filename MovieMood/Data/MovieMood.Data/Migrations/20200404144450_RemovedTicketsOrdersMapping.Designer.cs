@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieMood.Data;
 
 namespace MovieMood.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200404144450_RemovedTicketsOrdersMapping")]
+    partial class RemovedTicketsOrdersMapping
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,6 +173,9 @@ namespace MovieMood.Data.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -372,9 +377,6 @@ namespace MovieMood.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ProjectionId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("datetime2");
 
@@ -387,8 +389,6 @@ namespace MovieMood.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("ProjectionId");
 
                     b.HasIndex("UserId");
 
@@ -582,10 +582,6 @@ namespace MovieMood.Data.Migrations
 
             modelBuilder.Entity("MovieMood.Data.Models.Order", b =>
                 {
-                    b.HasOne("MovieMood.Data.Models.Projection", "Projection")
-                        .WithMany("Orders")
-                        .HasForeignKey("ProjectionId");
-
                     b.HasOne("MovieMood.Data.Models.ApplicationUser", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId");

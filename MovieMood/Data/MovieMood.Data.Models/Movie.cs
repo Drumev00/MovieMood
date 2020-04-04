@@ -5,7 +5,6 @@
     using System.ComponentModel.DataAnnotations;
 
     using MovieMood.Data.Common.Models;
-    using MovieMood.Data.Models.Enums;
 
     public class Movie : BaseDeletableModel<string>
     {

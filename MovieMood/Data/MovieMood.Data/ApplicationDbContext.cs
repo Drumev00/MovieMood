@@ -35,8 +35,6 @@
 
         public DbSet<Order> Orders { get; set; }
 
-        public DbSet<TicketsOrders> TicketOrders { get; set; }
-
         public DbSet<MovieGenres> MovieGenres { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
@@ -64,7 +62,6 @@
             base.OnModelCreating(builder);
 
             ConfigureUserIdentityRelations(builder);
-            ConfigureTicketOrdersTable(builder);
             ConfigureMovieGenresTable(builder);
 
             EntityIndexesConfiguration.Configure(builder);
@@ -111,12 +108,6 @@
                 .HasForeignKey(e => e.UserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
-        }
-
-        private static void ConfigureTicketOrdersTable(ModelBuilder builder)
-        {
-            builder.Entity<TicketsOrders>()
-                .HasKey(to => new { to.OrderId, to.TicketId });
         }
 
         private static void ConfigureMovieGenresTable(ModelBuilder builder)

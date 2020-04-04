@@ -10,7 +10,7 @@
     {
         public Order()
         {
-            this.TicketsOrders = new HashSet<TicketsOrders>();
+            this.Tickets = new HashSet<Ticket>();
         }
 
         [Required]
@@ -24,6 +24,10 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<TicketsOrders> TicketsOrders { get; set; }
+        public string ProjectionId { get; set; }
+
+        public virtual Projection Projection { get; set; }
+
+        public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

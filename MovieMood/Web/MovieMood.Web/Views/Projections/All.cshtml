@@ -3,8 +3,8 @@
 
 @foreach (var projection in Model.Projections)
 {
-    var projectionTime = projection.Time.Minute == 0 
-        ? ((projection.Time.Hour + ":" + projection.Time.Minute) + "0") 
+    var projectionTime = projection.Time.Minute == 0
+        ? ((projection.Time.Hour + ":" + projection.Time.Minute) + "0")
         : projection.Time.Hour + ":" + projection.Time.Minute;
     var cloudlink = GlobalConstants.CloudinaryStartUrl + projection.MovieImagePath;
 
@@ -23,7 +23,7 @@
                     <br />
                     @if (projection.IsPremiere)
                     {
-                        <p class="ml-4">Premiere: @projection.Time.Date.ToLocalTime()</p>
+                        <p class="ml-4">Premiere: @projection.Time.Date.GetDateTimeFormats()[0]</p>
                     }
                     <span style="margin: 25px">Buy a Ticket</span>
                     <div class="row" style="border: groove; margin: 25px; width: 650px">
@@ -36,9 +36,14 @@
                         {
                             <h4 class="d-inline" style="margin: 10px">3D</h4>
                         }
-                        <h4 style="margin-left: 190px"><a href="/Tickets/Buy/?projectionId=@projection.Id" class="btn btn-secondary mt-1">@projectionTime</a></h4>
+                        <h4 style="margin-left: 190px"><a href="/Orders/Buy/?projectionId=@projection.Id" class="btn btn-secondary mt-1">@projectionTime</a></h4>
                     </div>
                 </div>
+                @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                {
+                    <a href="/Administration/Projections/Delete?projectionId=@projection.Id" class="btn btn-danger text-white d-inline float-right m-1">Delete</a>
+                    <div class="clearfix"></div>
+                }
             </aside>
         </div>
     </div>

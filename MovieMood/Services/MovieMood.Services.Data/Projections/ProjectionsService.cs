@@ -50,5 +50,23 @@
             await this.projectionsRepository.AddAsync(projection);
             await this.projectionsRepository.SaveChangesAsync();
         }
+
+        public async Task DeleteAsync(string projectionId)
+        {
+            var projection = this.projectionsRepository.All()
+                .Where(p => p.Id == projectionId)
+                .FirstOrDefault();
+
+            this.projectionsRepository.Delete(projection);
+            await this.projectionsRepository.SaveChangesAsync();
+        }
+
+        public T GetById<T>(string projectionId)
+        {
+            return this.projectionsRepository.All()
+                .Where(p => p.Id == projectionId)
+                .To<T>()
+                .FirstOrDefault();
+        }
     }
 }

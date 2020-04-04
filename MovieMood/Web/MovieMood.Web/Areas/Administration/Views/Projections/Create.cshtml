@@ -17,7 +17,6 @@
         <label asp-for="HallId">Hall</label>
         <select class="form-control" style="width: 535px" asp-for="HallId" asp-items="Model.Halls.Select(x => new SelectListItem(x.Name, x.Id.ToString()))"></select>
         <span asp-validation-for="HallId" class="text-danger" />
-
     </div>
     <div class="form-check form-check-inline">
         <input asp-for="IsPremiere" class="form-check-input" type="checkbox" name="IsPremiere">

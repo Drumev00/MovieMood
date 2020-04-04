@@ -10,5 +10,9 @@
         Task CreateAsync(CreateProjectionInputModel model);
 
         IEnumerable<T> All<T>();
+
+        T GetById<T>(string projectionId);
+
+        Task DeleteAsync(string projectionId);
     }
 }

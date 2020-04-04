@@ -11,6 +11,7 @@
         public Projection()
         {
             this.Tickets = new HashSet<Ticket>();
+            this.Orders = new HashSet<Order>();
         }
 
         [Required]
@@ -32,5 +33,7 @@
         public virtual Movie Movie { get; set; }
 
         public virtual ICollection<Ticket> Tickets { get; set; }
+
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

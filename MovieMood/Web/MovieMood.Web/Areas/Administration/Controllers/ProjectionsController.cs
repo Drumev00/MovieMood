@@ -42,8 +42,14 @@
 
             await this.projectionsService.CreateAsync(model);
 
-            return this.Redirect("/");
+            return this.Redirect("/Projections/All");
         }
 
+        public async Task<IActionResult> Delete(string projectionId)
+        {
+            await this.projectionsService.DeleteAsync(projectionId);
+
+            return this.Redirect("/Projections/All");
+        }
     }
 }

@@ -9,13 +9,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
     <environment names="Development">
+        <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/css/bootstrap.css" rel='stylesheet' type='text/css' />
+        <script src="~/js/jquery.min.js" asp-append-version="true"></script>
         <link href="~/css/style.css" rel="stylesheet" type="text/css" media="all" />
-        <script src="~/js/jquery.min.js"></script>
         <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
     </environment>
     <environment names="Staging,Production">
+        <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
     </environment>
@@ -121,12 +123,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <script type="text/javascript" src="~/js/jquery.flexisel.js"></script>
         </environment>
         <environment names="Staging,Production">
+            <script src="~/js/jquery.min.js"></script>
             <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
             <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
             <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
             <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
             <script src="~/js/site.min.js" asp-append-version="true"></script>
-            <script type="text/javascript" src="~/js/jquery.flexisel.js"></script>
+            <script type="text/javascript" src="~/js/jquery.flexisel.js" asp-append-version="true"></script>
         </environment>
 
         @this.RenderSection("Scripts", required: false)
