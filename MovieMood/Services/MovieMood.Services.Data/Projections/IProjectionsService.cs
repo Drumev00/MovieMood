@@ -14,5 +14,7 @@
         T GetById<T>(string projectionId);
 
         Task DeleteAsync(string projectionId);
+
+        Task EditAsync(EditProjectionViewModel model);
     }
 }

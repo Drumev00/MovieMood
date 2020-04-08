@@ -8,7 +8,7 @@
                 <input style="width: 535px" asp-for="TicketQuantity" type="number" class="form-control" />
                 <span asp-validation-for="TicketQuantity" class="text-danger" />
             </div>
-            <input asp-for="ProjectionId" type="hidden" value="@TempData["projection"]" class="form-control" />
+            <input asp-for="ProjectionId" type="hidden" value="@Model.ProjectionId" class="form-control" />
         </div>
-        <input style="margin-top: 68px" asp-area="" asp-controller="Orders" asp-action="Buy" type="submit" value="Buy" class="btn btn-success bottom" />
+            <input style="margin-top: 68px" asp-area="" asp-controller="Orders" asp-action="Buy" type="submit" value="Buy" class="btn btn-success bottom" />
     </form>

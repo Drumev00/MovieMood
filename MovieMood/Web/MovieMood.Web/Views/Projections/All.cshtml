@@ -41,6 +41,7 @@
                 </div>
                 @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                 {
+                    <a href="/Administration/Projections/Edit?projectionId=@projection.Id" class="btn btn-info text-white d-inline float-right m-1">Edit</a>
                     <a href="/Administration/Projections/Delete?projectionId=@projection.Id" class="btn btn-danger text-white d-inline float-right m-1">Delete</a>
                     <div class="clearfix"></div>
                 }

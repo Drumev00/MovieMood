@@ -2,12 +2,14 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using MovieMood.Data.Models;
     using MovieMood.Services.Data.Orders;
     using MovieMood.Web.ViewModels.Orders.Users.InputModels;
 
+    [Authorize]
     public class OrdersController : BaseController
     {
         private readonly IOrdersService ordersService;
@@ -23,8 +25,12 @@
 
         public IActionResult Buy(string projectionId)
         {
-            this.TempData["projection"] = projectionId;
-            return this.View();
+            var viewModel = new OrderTicketsInputModel
+            {
+                ProjectionId = projectionId,
+            };
+
+            return this.View(viewModel);
         }
 
         [HttpPost]
@@ -38,8 +44,9 @@
             }
 
             await this.ordersService.BuyAsync(model);
+            var order = this.ordersService.GetOrder<OrderInfoViewModel>(model.ProjectionId, model.UserId, model.TicketQuantity);
 
-            return this.Redirect("/");
+            return this.Redirect($"/Tickets/Buy?orderId={order.Id}&q={order.TicketQuantity}");
         }
     }
 }

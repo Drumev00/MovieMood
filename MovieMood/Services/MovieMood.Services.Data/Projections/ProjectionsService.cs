@@ -61,6 +61,20 @@
             await this.projectionsRepository.SaveChangesAsync();
         }
 
+        public async Task EditAsync(EditProjectionViewModel model)
+        {
+            var projectionFromBase = this.projectionsRepository.All()
+                .FirstOrDefault(p => p.Id == model.Id);
+
+            projectionFromBase.Time = model.Time;
+            projectionFromBase.IsPremiere = model.IsPremiere;
+            projectionFromBase.Is3D = model.Is3D;
+            projectionFromBase.HallId = model.HallId;
+
+            this.projectionsRepository.Update(projectionFromBase);
+            await this.projectionsRepository.SaveChangesAsync();
+        }
+
         public T GetById<T>(string projectionId)
         {
             return this.projectionsRepository.All()

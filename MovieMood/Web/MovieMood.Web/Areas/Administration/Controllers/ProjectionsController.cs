@@ -45,6 +45,28 @@
             return this.Redirect("/Projections/All");
         }
 
+        public IActionResult Edit(string projectionId)
+        {
+            var viewModel = this.projectionsService.GetById<EditProjectionViewModel>(projectionId);
+            viewModel.Halls = this.hallsService.All<HallDropDownViewModel>();
+            this.TempData["projectionId"] = projectionId;
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditProjectionViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            await this.projectionsService.EditAsync(model);
+
+            return this.Redirect("/Projections/All");
+        }
+
         public async Task<IActionResult> Delete(string projectionId)
         {
             await this.projectionsService.DeleteAsync(projectionId);

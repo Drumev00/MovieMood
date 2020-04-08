@@ -1,0 +1,47 @@
+﻿@model MovieMood.Web.ViewModels.Tickets.Users.InputModels.BuyTicketsInputModel
+@using MovieMood.Common
+
+<form asp-action="Buy" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="row">
+        @for (int j = 0; j < Model.TicketsCount; j++)
+        {
+            <div class="form-group">
+                <label asp-for="SeatRow" class="ml-1">Row</label>
+                <select name="ActualRows" class="form-control col-md-4" style="width: 205px" asp-for="SeatRow" asp-items="Model.Rows.Select(r => new SelectListItem(r.ToString(), r.ToString())).OrderBy(s => int.Parse(s.Text))"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeatNumber" class="ml-1">Number</label>
+                <select name="ActualNumbers" class="form-control col-md-4" style="width: 205px" asp-for="SeatNumber" asp-items="Model.Numbers.Select(r => new SelectListItem(r.ToString(), r.ToString())).OrderBy(s => int.Parse(s.Text))"></select>
+            </div>
+        }
+    </div>
+    <hr />
+    <div class="mb-2">
+        @if (Model.Projection.IsPremiere && Model.Projection.Is3D)
+        {
+            <div>
+                Cost: @(Model.Price = (GlobalConstants.RegularTicketPrice + GlobalConstants.PremiereAddition + GlobalConstants.ThreeDGlasses) * Model.TicketsCount) BGN
+            </div>
+        }
+        else if (Model.Projection.IsPremiere)
+        {
+            <div>
+                Cost: @(Model.Price = (GlobalConstants.RegularTicketPrice + GlobalConstants.PremiereAddition) * Model.TicketsCount) BGN
+            </div>
+        }
+        else if (Model.Projection.Is3D)
+        {
+            <div>
+                Cost: @(Model.Price = (GlobalConstants.RegularTicketPrice + GlobalConstants.ThreeDGlasses) * Model.TicketsCount) BGN
+            </div>
+        }
+        else
+        {
+            <div>
+                Cost: @(Model.Price = GlobalConstants.RegularTicketPrice * Model.TicketsCount) BGN
+            </div>
+        }
+        <input asp-area="" asp-controller="Tickets" asp-action="Buy" type="submit" value="Buy" class="btn btn-primary d-block mt-4" />
+    </div>
+</form>

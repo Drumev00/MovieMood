@@ -7,5 +7,11 @@
     public interface IOrdersService
     {
         Task BuyAsync(OrderTicketsInputModel model);
+
+        T GetOrder<T>(string projectionId, string userId, int ticketsCount);
+
+        int GetHallId(string orderId);
+
+        string GetProjectionId(string orderId);
     }
 }
