@@ -33,6 +33,15 @@
             await this.ordersRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(string orderId)
+        {
+            var order = this.ordersRepository.All()
+                .FirstOrDefault(o => o.Id == orderId);
+
+            this.ordersRepository.Delete(order);
+            await this.ordersRepository.SaveChangesAsync();
+        }
+
         public int GetHallId(string orderId)
         {
             var order = this.ordersRepository.AllAsNoTracking()

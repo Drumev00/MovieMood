@@ -13,5 +13,7 @@
         int GetHallId(string orderId);
 
         string GetProjectionId(string orderId);
+
+        Task DeleteAsync(string orderId);
     }
 }

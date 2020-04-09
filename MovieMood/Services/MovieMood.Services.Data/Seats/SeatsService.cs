@@ -7,7 +7,6 @@
 
     using MovieMood.Data.Common.Repositories;
     using MovieMood.Data.Models;
-    using MovieMood.Services.Mapping;
 
     public class SeatsService : ISeatsService
     {
@@ -20,7 +19,7 @@
 
         public IEnumerable<int> NotReservedRows(int hallId)
         {
-            var seats = this.seatsRepository.AllAsNoTracking()
+            var seats = this.seatsRepository.All()
                 .Where(s => !s.IsReserved &&
                 s.HallId == hallId)
                 .Select(s => s.Row)
@@ -32,7 +31,7 @@
 
         public IEnumerable<int> NotReservedNumbers(int hallId)
         {
-            var seats = this.seatsRepository.AllAsNoTracking()
+            var seats = this.seatsRepository.All()
                 .Where(
                 s => !s.IsReserved &&
                 s.HallId == hallId)
@@ -68,5 +67,31 @@
             await this.seatsRepository.SaveChangesAsync();
         }
 
+        public Seat FindSeat(int row, int number, int hallId)
+        {
+            var seat = this.seatsRepository.All()
+                .Where(s => s.Row == row &&
+                s.Number == number &&
+                s.HallId == hallId)
+                .FirstOrDefault();
+
+            return seat;
+        }
+
+        public async Task ModifySeatState(Seat seat)
+        {
+            this.seatsRepository.Update(seat);
+            await this.seatsRepository.SaveChangesAsync();
+        }
+
+        public bool IsReserved(int row, int number, int hallId)
+        {
+            var seat = this.seatsRepository.All()
+                .FirstOrDefault(s => s.HallId == hallId &&
+                s.Row == row &&
+                s.Number == number);
+
+            return seat.IsReserved;
+        }
     }
 }

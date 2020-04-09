@@ -22,6 +22,7 @@
     using MovieMood.Services.Data.Orders;
     using MovieMood.Services.Data.Projections;
     using MovieMood.Services.Data.Seats;
+    using MovieMood.Services.Data.Tickets;
     using MovieMood.Services.Data.Users;
     using MovieMood.Services.Mapping;
     using MovieMood.Services.Messaging;
@@ -71,6 +72,7 @@
             services.AddTransient<IProjectionsService, ProjectionsService>();
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<ITicketsService, TicketsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

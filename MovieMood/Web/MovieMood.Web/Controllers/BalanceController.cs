@@ -38,7 +38,7 @@
             var user = this.userManager.GetUserAsync(this.User).Result;
             var claim = this.userManager.GetClaimsAsync(user).Result.FirstOrDefault(x => x.Type == "Balance");
             var users = await this.userManager.GetUsersForClaimAsync(claim);
-            await this.usersService.GetClaim(user, users, model);
+            await this.usersService.ModifyClaim(user, users, model);
 
             return this.Redirect("/");
         }

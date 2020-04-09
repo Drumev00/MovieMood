@@ -16,16 +16,22 @@
         public ProjectionsTicketInfoViewModel Projection { get; set; }
 
         [Required]
+        public string OrderId { get; set; }
+
+        [Required]
+        public int HallId { get; set; }
+
+        [Required]
         public int SeatRow { get; set; }
 
-        public IEnumerable<string> ActualRows { get; set; }
+        public IList<int> ActualRows { get; set; }
 
         public IEnumerable<int> Rows { get; set; }
 
         [Required]
         public int SeatNumber { get; set; }
 
-        public IEnumerable<string> ActualNumbers { get; set; }
+        public IList<int> ActualNumbers { get; set; }
 
         public IEnumerable<int> Numbers { get; set; }
     }

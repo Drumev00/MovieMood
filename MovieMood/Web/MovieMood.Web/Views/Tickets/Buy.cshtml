@@ -42,6 +42,13 @@
                 Cost: @(Model.Price = GlobalConstants.RegularTicketPrice * Model.TicketsCount) BGN
             </div>
         }
+        <input asp-for="Price" type="hidden" value="@Model.Price" />
+        <input asp-for="Projection.Id" type="hidden" value="@Model.Projection.Id" />
+        <input asp-for="OrderId" type="hidden" value="@Model.OrderId" />
+        <input asp-for="TicketsCount" type="hidden" value="@Model.TicketsCount" />
+        <input asp-for="HallId" type="hidden" value="@Model.HallId" />
         <input asp-area="" asp-controller="Tickets" asp-action="Buy" type="submit" value="Buy" class="btn btn-primary d-block mt-4" />
+        <div class="alert alert-light mb-4 text-danger">@this.TempData["sameSeat"]</div>
+        <div class="alert alert-light mb-4 text-danger">@this.TempData["reservedSeatMessage"]</div>
     </div>
 </form>
