@@ -19,5 +19,7 @@
         public const decimal PremiereAddition = 5.5m;
 
         public const decimal ThreeDGlasses = 2.0m;
+
+        public const int MoviesCountPerPage = 12;
     }
 }

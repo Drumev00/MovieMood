@@ -7,7 +7,6 @@
 
     using MovieMood.Data.Common.Repositories;
     using MovieMood.Data.Models;
-    using MovieMood.Data.Models.Enums;
     using MovieMood.Services.Data.MovieGenres;
     using MovieMood.Services.Mapping;
     using MovieMood.Web.ViewModels.Movies.Administration.InputModels;
@@ -26,13 +25,17 @@
             this.movieGenresService = movieGenresService;
         }
 
-        public IEnumerable<T> All<T>()
+        public IEnumerable<T> All<T>(int? take = null, int skip = 0)
         {
-            var movies = this.moviesRepository.AllAsNoTracking()
-                .To<T>()
-                .ToList();
+            var movies = this.moviesRepository.All()
+                .OrderByDescending(m => m.CreatedOn)
+                .Skip(skip);
+            if (take.HasValue)
+            {
+                 movies = movies.Take(take.Value);
+            }
 
-            return movies;
+            return movies.To<T>().ToList();
         }
 
         public async Task CreateAsync(CreateMovieInputModel model)
@@ -106,6 +109,11 @@
             await this.movieGenresService.SoftDeleteGenresAsync(movie.Id);
             this.moviesRepository.Delete(movie);
             await this.moviesRepository.SaveChangesAsync();
+        }
+
+        public int GetMoviesCount()
+        {
+            return this.moviesRepository.AllAsNoTracking().Count();
         }
     }
 }

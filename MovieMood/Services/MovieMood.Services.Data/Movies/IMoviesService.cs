@@ -10,7 +10,7 @@
     {
         Task CreateAsync(CreateMovieInputModel model);
 
-        IEnumerable<T> All<T>();
+        IEnumerable<T> All<T>(int? take = null, int skip = 0);
 
         T GetDetailsById<T>(string id);
 
@@ -19,5 +19,7 @@
         Task SoftDeleteAsync(string movieId);
 
         Task EditAsync(EditMovieViewModel model);
+
+        int GetMoviesCount();
     }
 }
