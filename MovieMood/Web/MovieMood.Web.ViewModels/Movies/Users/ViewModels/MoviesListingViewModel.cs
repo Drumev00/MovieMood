@@ -8,6 +8,8 @@
 
         public int PagesCount { get; set; }
 
+        public IList<string> Genres { get; set; }
+
         public IEnumerable<MovieInfoViewModel> Movies { get; set; }
     }
 }

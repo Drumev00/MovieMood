@@ -32,7 +32,7 @@
                 .Skip(skip);
             if (take.HasValue)
             {
-                 movies = movies.Take(take.Value);
+                movies = movies.Take(take.Value);
             }
 
             return movies.To<T>().ToList();
@@ -114,6 +114,24 @@
         public int GetMoviesCount()
         {
             return this.moviesRepository.AllAsNoTracking().Count();
+        }
+
+        public IList<T> GetMoviesByChosenGenre<T>(IList<string> genres)
+        {
+            var movieIds = this.movieGenresService.GetMovieIdsByGenres(genres);
+            var movies = new List<T>();
+
+            for (int i = 0; i < movieIds.Count; i++)
+            {
+                var movieFromBase = this.moviesRepository.AllAsNoTracking()
+                    .Where(m => m.Id == movieIds[i])
+                    .To<T>()
+                    .FirstOrDefault();
+
+                movies.Add(movieFromBase);
+            }
+
+            return movies;
         }
     }
 }

@@ -21,5 +21,7 @@
         Task EditAsync(EditMovieViewModel model);
 
         int GetMoviesCount();
+
+        IList<T> GetMoviesByChosenGenre<T>(IList<string> genres);
     }
 }

@@ -7,6 +7,7 @@
     using MovieMood.Web.ViewModels.Movies.Users.ViewModels;
     using MovieMood.Common;
     using System;
+    using System.Collections.Generic;
 
     [Authorize]
     public class MoviesController : BaseController
@@ -35,10 +36,25 @@
             return this.View(viewModel);
         }
 
+        public IActionResult Sort([FromQuery] IList<string> genres)
+        {
+            var movies = this.moviesService.GetMoviesByChosenGenre<MovieInfoViewModel>(genres);
+            var count = movies.Count;
+
+            var viewModel = new MoviesListingViewModel
+            {
+                Movies = movies,
+                PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.MoviesCountPerPage),
+                CurrentPage = 1,
+            };
+
+            return this.View("All", viewModel);
+        }
+
         public IActionResult Details(string id)
         {
             var viewModel = this.moviesService.GetDetailsById<MovieDetailsViewModel>(id);
-            viewModel.Genres = this.movieGenresService.GetGenres(id);
+            viewModel.Genres = this.movieGenresService.GetGenresByMovieId(id);
 
             return this.View(viewModel);
         }

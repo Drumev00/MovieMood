@@ -7,8 +7,12 @@
     {
         Task CreateMappingAsync(string movieId, string genre);
 
-        IEnumerable<string> GetGenres(string movieId);
+        IEnumerable<string> GetGenresByMovieId(string movieId);
 
         Task SoftDeleteGenresAsync(string movieId);
+
+        IList<string> GetMovieIdsByGenres(IList<string> genres);
+
+        IList<string> GetAllGenres();
     }
 }

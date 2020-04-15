@@ -1,6 +1,31 @@
 ﻿@model MovieMood.Web.ViewModels.Movies.Users.ViewModels.MoviesListingViewModel
 @using MovieMood.Common
 
+<div class="border mt-3">
+    <form asp-action="Sort" method="get">
+        <header>
+            <h3 class="text-center">Sort by Genre:</h3>
+        </header>
+        <div class="row">
+            @foreach (var genre in Enum.GetValues(typeof(MovieMood.Data.Models.Enums.Genre)))
+            {
+                <div class="col-md-3">
+                    <label>
+                        <input type="checkbox" value="@genre" name="Genres" />
+                        @genre
+                    </label>
+                </div>
+            }
+        </div>
+        <div style="text-align: center">
+            <div style="margin: 0 auto; text-align: center; width: inherit; display: inline-block;">
+                <button asp-controller="Movies" asp-action="Sort" asp-route-genres="@Model.Genres" style="margin-top: 30px;" class="btn btn-primary text-white mt-2 float-left">Sort</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </form>
+</div>
+
 <div class="bg-blur container">
     <div class="row">
         @foreach (var movie in Model.Movies)
