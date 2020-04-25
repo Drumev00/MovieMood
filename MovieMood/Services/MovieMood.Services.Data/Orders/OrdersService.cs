@@ -35,6 +35,11 @@
 
         public async Task DeleteAsync(string orderId)
         {
+            if (orderId == null)
+            {
+                throw new ArgumentNullException("Parameter \"orderId\" cannot be null");
+            }
+
             var order = this.ordersRepository.All()
                 .FirstOrDefault(o => o.Id == orderId);
 
@@ -44,6 +49,11 @@
 
         public int GetHallId(string orderId)
         {
+            if (orderId == null)
+            {
+                throw new ArgumentNullException("Parameter \"orderId\" cannot be null");
+            }
+
             var order = this.ordersRepository.AllAsNoTracking()
                 .Where(s => s.Id == orderId)
                 .Select(s => s.Projection.HallId)
@@ -54,6 +64,11 @@
 
         public T GetOrder<T>(string projectionId, string userId, int ticketsCount)
         {
+            if (projectionId == null || userId == null || ticketsCount <= 0)
+            {
+                throw new ArgumentNullException("All parameters are required. \"ticketsCount\" must be positive number!");
+            }
+
             var order = this.ordersRepository.AllAsNoTracking()
                 .Where(
                 o => o.ProjectionId == projectionId &&
@@ -66,6 +81,11 @@
 
         public string GetProjectionId(string orderId)
         {
+            if (orderId == null)
+            {
+                throw new ArgumentNullException("Parameter \"orderId\" cannot be null");
+            }
+
             var order = this.ordersRepository.AllAsNoTracking()
                 .FirstOrDefault(o => o.Id == orderId);
 

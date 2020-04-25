@@ -4,16 +4,21 @@
 
     using Microsoft.AspNetCore.Mvc;
     using MovieMood.Services.Data.Halls;
+    using MovieMood.Services.Data.Seats;
     using MovieMood.Web.ViewModels.Halls.Administration.InputModels;
     using MovieMood.Web.ViewModels.Halls.Administration.ViewModels;
 
     public class HallsController : AdministrationController
     {
         private readonly IHallsService hallsService;
+        private readonly ISeatsService seatsService;
 
-        public HallsController(IHallsService hallsService)
+        public HallsController(
+            IHallsService hallsService,
+            ISeatsService seatsService)
         {
             this.hallsService = hallsService;
+            this.seatsService = seatsService;
         }
 
         public IActionResult Create()
@@ -54,6 +59,13 @@
             var viewModel = this.hallsService.GetDetailsById<HallDetailsViewModel>(hallId);
 
             return this.View(viewModel);
+        }
+
+        public IActionResult Free(int hallId)
+        {
+            this.seatsService.FreeTheSeats(hallId);
+
+            return this.RedirectToAction("All");
         }
 
         public async Task<IActionResult> Delete(int hallId)

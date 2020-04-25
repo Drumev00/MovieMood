@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using MovieMood.Common;
     using MovieMood.Data.Common.Repositories;
     using MovieMood.Data.Models;
 
@@ -19,6 +20,11 @@
 
         public IEnumerable<int> NotReservedRows(int hallId)
         {
+            if (hallId <= 0)
+            {
+                throw new ArgumentException("Parameter \"hallId\" must be positive number");
+            }
+
             var seats = this.seatsRepository.All()
                 .Where(s => !s.IsReserved &&
                 s.HallId == hallId)
@@ -31,6 +37,11 @@
 
         public IEnumerable<int> NotReservedNumbers(int hallId)
         {
+            if (hallId <= 0)
+            {
+                throw new ArgumentException("Parameter \"hallId\" must be positive number");
+            }
+
             var seats = this.seatsRepository.All()
                 .Where(
                 s => !s.IsReserved &&
@@ -44,6 +55,12 @@
 
         public async Task CreateAsync(int row, int number, int hallId)
         {
+            if (row > GlobalConstants.SeatsRow || row <= 0 || number > GlobalConstants.SeatsCol || number <= 0 || hallId <= 0)
+            {
+                throw new ArgumentException
+                    ("Parameter \"row\" should be between 1 and 10. Parameter \"number\" should be between 1 and 18 and \"hallId\" must be positive number");
+            }
+
             var seat = new Seat
             {
                 CreatedOn = DateTime.UtcNow,
@@ -59,6 +76,11 @@
 
         public async Task DeleteAsync(int hallId)
         {
+            if (hallId <= 0)
+            {
+                throw new ArgumentException("Parameter \"hallId\" must be positive number");
+            }
+
             var seat = this.seatsRepository.All()
                 .Where(s => s.HallId == hallId)
                 .FirstOrDefault();
@@ -69,6 +91,12 @@
 
         public Seat FindSeat(int row, int number, int hallId)
         {
+            if (row > GlobalConstants.SeatsRow || row <= 0 || number > GlobalConstants.SeatsCol || number <= 0 || hallId <= 0)
+            {
+                throw new ArgumentException
+                    ("Parameter \"row\" should be between 1 and 10. Parameter \"number\" should be between 1 and 18 and \"hallId\" must be positive number");
+            }
+
             var seat = this.seatsRepository.All()
                 .Where(s => s.Row == row &&
                 s.Number == number &&
@@ -86,12 +114,40 @@
 
         public bool IsReserved(int row, int number, int hallId)
         {
+            if (row > GlobalConstants.SeatsRow || row <= 0 || number > GlobalConstants.SeatsCol || number <= 0 || hallId <= 0)
+            {
+                throw new ArgumentException
+                    ("Parameter \"row\" should be between 1 and 10. Parameter \"number\" should be between 1 and 18 and \"hallId\" must be positive number");
+            }
+
             var seat = this.seatsRepository.All()
                 .FirstOrDefault(s => s.HallId == hallId &&
                 s.Row == row &&
                 s.Number == number);
 
             return seat.IsReserved;
+        }
+
+        public void FreeTheSeats(int hallId)
+        {
+            if (hallId <= 0)
+            {
+                throw new ArgumentException("Parameter \"hallId\" must be positive number");
+            }
+
+            var seats = this.seatsRepository.All()
+                .Where(s => s.HallId == hallId)
+                .ToList();
+
+            foreach (var seat in seats)
+            {
+                if (seat.IsReserved)
+                {
+                    seat.IsReserved = false;
+                    this.seatsRepository.Update(seat);
+                    this.seatsRepository.SaveChangesAsync();
+                }
+            }
         }
     }
 }

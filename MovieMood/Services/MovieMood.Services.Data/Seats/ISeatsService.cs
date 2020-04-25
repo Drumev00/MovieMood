@@ -20,5 +20,7 @@
         IEnumerable<int> NotReservedNumbers(int hallId);
 
         bool IsReserved(int row, int number, int hallId);
+
+        void FreeTheSeats(int hallId);
     }
 }

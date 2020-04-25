@@ -82,6 +82,11 @@
 
         public string GetIdByName(string name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException("Parameter \"name\" cannot be null");
+            }
+
             var movie = this.moviesRepository.AllAsNoTracking()
                 .Where(m => m.Name.ToLower() == name.ToLower())
                 .Select(m => m.Id)
@@ -92,6 +97,11 @@
 
         public T GetDetailsById<T>(string id)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException("Parameter \"id\" cannot be null");
+            }
+
             var movie = this.moviesRepository.All()
                 .Where(m => m.Id == id)
                 .To<T>()
@@ -102,6 +112,11 @@
 
         public async Task SoftDeleteAsync(string movieId)
         {
+            if (movieId == null)
+            {
+                throw new ArgumentNullException("Parameter \"movieId\" cannot be null");
+            }
+
             var movie = this.moviesRepository.All()
                 .Where(m => m.Id == movieId)
                 .FirstOrDefault();

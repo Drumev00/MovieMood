@@ -20,6 +20,11 @@
 
         public async Task CreateMappingAsync(string movieId, string genre)
         {
+            if (movieId == null || genre == null)
+            {
+                throw new ArgumentNullException("Both parameters should have value other than null");
+            }
+
             var movieGenres = new MovieGenres
             {
                 MovieId = movieId,
@@ -53,6 +58,11 @@
 
         public IEnumerable<string> GetGenresByMovieId(string movieId)
         {
+            if (movieId == null)
+            {
+                throw new ArgumentNullException("Parameter \"movieId\" must have value other than null");
+            }
+
             var genres = this.movieGenresRepository.All()
                 .Where(g => g.MovieId == movieId)
                 .Select(g => g.Genre.ToString())
@@ -63,6 +73,11 @@
 
         public async Task SoftDeleteGenresAsync(string movieId)
         {
+            if (movieId == null)
+            {
+                throw new ArgumentNullException("Parameter \"movieId\" must have value other than null");
+            }
+
             var movieGenres = this.movieGenresRepository.All()
                 .Where(mg => mg.MovieId == movieId)
                 .ToList();

@@ -34,6 +34,11 @@
 
         public async Task CreateAsync(string name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(name);
+            }
+
             var hall = new Hall
             {
                 CreatedOn = DateTime.UtcNow,
@@ -54,6 +59,11 @@
 
         public T GetDetailsById<T>(int id)
         {
+            if (id <= 0)
+            {
+                throw new ArgumentException("Parameter id should be positive number");
+            }
+
             var hall = this.hallsRepository.All()
                 .Where(h => h.Id == id)
                 .To<T>()
@@ -65,6 +75,11 @@
         public async Task SoftDeleteHallAsync(int hallId)
         {
             var hall = this.hallsRepository.All().FirstOrDefault(h => h.Id == hallId);
+
+            if (hall == null)
+            {
+                throw new ArgumentNullException("Not such hall has been found");
+            }
 
             this.hallsRepository.Delete(hall);
 

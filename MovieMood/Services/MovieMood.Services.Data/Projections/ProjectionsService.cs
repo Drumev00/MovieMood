@@ -53,6 +53,11 @@
 
         public async Task DeleteAsync(string projectionId)
         {
+            if (projectionId == null)
+            {
+                throw new ArgumentNullException("Parameter \"projectionId\" cannot be null");
+            }
+
             var projection = this.projectionsRepository.All()
                 .Where(p => p.Id == projectionId)
                 .FirstOrDefault();
@@ -77,6 +82,11 @@
 
         public T GetById<T>(string projectionId)
         {
+            if (projectionId == null)
+            {
+                throw new ArgumentNullException("Parameter \"projectionId\" cannot be null");
+            }
+
             return this.projectionsRepository.All()
                 .Where(p => p.Id == projectionId)
                 .To<T>()
